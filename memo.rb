@@ -18,7 +18,6 @@ if flag_number == 1
   
   CSV.open("#{file_new}.csv","w") do |text|
     text << ["#{memo_new}"]
-  
   end
   
 elsif flag_number == 2
@@ -30,15 +29,14 @@ elsif flag_number == 2
   
   puts"現在の入力内容は下記のとおりです"
   puts CSV.read("#{file_name}.csv")
-  
+  file = File.open("#{file_name}.csv", "a")
   puts"新たに内容を入力してください"
   puts"入力を完了する場合はCtrl+Dを押してください"
   
   memo_edit = STDIN.read
-  
-  CSV.open("#{file_name}.csv","r+")do |edit|
-    edit << ["#{memo_edit}"]
-    
+  memo_edit.each_line do |edit|
+    edit = edit.chomp
+    file.print(edit + ',')
   end
 
 else 
